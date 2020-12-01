@@ -1,19 +1,19 @@
-import requests
+from ensoserver.entrypoints.api import app
 
-from ensoserver import config
+from fastapi.testclient import TestClient
 
 
 def test_update_enso_values():
-    url = config.get_api_url()
-    r = requests.put(f'{url}/enso')
-    assert r.status_code == 200
-    assert r.headers.get('content-type') == 'application/json'
-    assert isinstance(r.json().get('number_enso_values'), int)
+    client = TestClient(app)
+    response = client.put("/enso")
+    assert response.status_code == 200
+    assert response.headers.get('content-type') == 'application/json'
+    assert isinstance(response.json().get('number_enso_values'), int)
 
 
-def test_get_enso_values(session):
-    url = config.get_api_url()
-    r = requests.get(f'{url}/enso')
-    assert r.status_code == 200
-    assert r.headers.get('content-type') == 'text/csv; charset=utf-8'
-    assert r.headers.get('content-disposition') == 'attachment;filename=enso.csv'
+def test_get_enso_values():
+    client = TestClient(app)
+    response = client.get("/enso")
+    assert response.status_code == 200
+    assert response.headers.get('content-type') == 'text/csv; charset=utf-8'
+    assert response.headers.get('content-disposition') == 'attachment;filename=enso.csv'

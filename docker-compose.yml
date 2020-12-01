@@ -10,7 +10,6 @@ services:
     environment:
       - DB_HOST=postgres
       - DB_PASSWORD=abc123
-      - API_HOST=app
       - PYTHONDONTWRITEBYTECODE=1
       - ENSO_URL=https://psl.noaa.gov/enso/mei/data/meiv2.data
     volumes:
