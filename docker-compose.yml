@@ -12,11 +12,12 @@ services:
       - DB_PASSWORD=abc123
       - PYTHONDONTWRITEBYTECODE=1
       - ENSO_URL=https://psl.noaa.gov/enso/mei/data/meiv2.data
+      - WAIT_HOSTS=postgres:5432
     volumes:
       - ./src:/src
       - ./tests:/tests
     ports:
-      - "8000:80"
+      - "80:80"
 
 
   postgres:
@@ -25,4 +26,4 @@ services:
       - POSTGRES_USER=ensoserver
       - POSTGRES_PASSWORD=abc123
     ports:
-      - "54321:5432"
+      - "5432:5432"

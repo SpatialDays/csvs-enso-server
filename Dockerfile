@@ -15,4 +15,7 @@ COPY tests/ /tests/
 
 WORKDIR /src
 
-CMD ["uvicorn", "ensoserver.entrypoints.api:app", "--host", "0.0.0.0", "--port", "80"]
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait /wait
+RUN chmod +x /wait
+
+CMD /wait && uvicorn ensoserver.entrypoints.api:app --host 0.0.0.0 --port 80
