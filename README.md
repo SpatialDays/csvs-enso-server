@@ -33,3 +33,6 @@ docker-compose up -d app
 ```
 
 Open http://localhost:8000/docs
+
+Remember to call the endpoint to update the database with the new values.
+curl -X PUT http://ensoserver/enso
